@@ -1,0 +1,41 @@
+package com.example.vaccinateasap
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class CenterRVAdapter (private val centerList: List<CenterRVModal>) : RecyclerView.Adapter<CenterRVAdapter.CenterRVViewHolder>(){
+    class CenterRVViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
+    val centerNameTV: TextView =itemView.findViewById(R.id.idTVcenterName)
+        val centerAddressTV: TextView =itemView.findViewById(R.id.idTVcenterLocation)
+        val centerTimingsTV: TextView =itemView.findViewById(R.id.idTVcenterTimings)
+        val vaccineNameTV: TextView =itemView.findViewById(R.id.idTVVaccineName)
+        val vaccineFeesTV: TextView =itemView.findViewById(R.id.idTVVaccineFees)
+        val ageLimitTV: TextView =itemView.findViewById(R.id.idTVAgeLimit)
+        val availabilityTV: TextView =itemView.findViewById(R.id.idTVAvailability)
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CenterRVViewHolder {
+   val itemView=LayoutInflater.from(parent.context).inflate(R.layout.center_rv_item,parent,false)
+        return CenterRVViewHolder(itemView)
+
+    }
+
+    override fun onBindViewHolder(holder: CenterRVViewHolder, position: Int) {
+        val center= centerList[position]
+        holder.centerNameTV.text=center.centerName
+        holder.centerAddressTV.text=center.centerAddress
+        holder.centerTimingsTV.text=("from : " +center.centerFromTime+ "to: " +center.centerToTime)
+        holder.vaccineNameTV.text=center.vaccineName
+        holder.vaccineFeesTV.text=center.fee_Type
+        holder.ageLimitTV.text=("Age Limit: " + center.ageLimit.toString())
+        holder.availabilityTV.text=("availability: "+center.availableCapacity.toString())
+    }
+
+    override fun getItemCount(): Int {
+        return centerList.size
+    }
+}
